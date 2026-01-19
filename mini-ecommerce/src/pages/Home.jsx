@@ -2,7 +2,8 @@ import "./Home.css"
 
 export default function Home() {
     return (
-        <div>
+<div>
+        <div className="home-container">
             <div className="welcome-section">
                 <h1>Welcome to Cartify</h1>
                 <p>Your one-stop destination for premium footwear</p>
@@ -37,7 +38,7 @@ export default function Home() {
                         {/* Slide 3 - Nike Dunk Low */}
                         <div className="slide">
                             <img 
-                                src="https://sothebys-com.brightspotcdn.com/dims4/default/fd636f0/2147483647/strip/true/crop/2184x1228+0+0/resize/684x385!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2Faa%2F2d%2F033c971542aa8720dea7d13f9a9d%2Fseo-calendar.jpg" 
+                                src="https://sothebys-com.brightspotcdn.com/dims4/default/fd636f0/2147483647/strip/true/crop/2184x1228+0+0/resize/684x385/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2Faa%2F2d%2F033c971542aa8720dea7d13f9a9d%2Fseo-calendar.jpg" 
                                 alt="Nike Dunk Low Retro"
                             />
                             <div className="slide-content">
@@ -85,5 +86,85 @@ export default function Home() {
                 </div>
             </div>
         </div>
-    );
+        <div className="features-section">
+          <h1>Why Choose Us</h1>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">🛍️</div>
+              <h3>Wide Selection</h3>
+              <p>Discover the latest trends in footwear from top brands worldwide.</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🚚</div>
+              <h3>Fast Shipping</h3>
+              <p>Get your favorite shoes delivered to your doorstep in no time.</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🔒</div>
+              <h3>Secure Payment</h3>
+              <p>Shop with confidence using our secure payment methods.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="hots">
+          <h1>Hot Products</h1>
+          <div className="hot-products">
+            {[
+              {
+                id: 1,
+                name: "Nike Air Force 1 '07",
+                price: 100,
+                originalPrice: 120,
+                image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?fm=jpg&q=80&w=1000",
+                isNew: true
+              },
+              {
+                id: 2,
+                name: "Adidas Ultraboost",
+                price: 180,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?fm=jpg&q=80&w=1000",
+                isNew: false
+              },
+              {
+                id: 3,
+                name: "Puma RS-X",
+                price: 110,
+                originalPrice: 140,
+                image: "https://images.unsplash.com/photo-1542272604-787c3835535d?fm=jpg&q=80&w=1000",
+                isNew: true
+              },
+              {
+                id: 4,
+                name: "New Balance 574",
+                price: 90,
+                image: "https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?fm=jpg&q=80&w=1000",
+                isNew: false
+              }
+            ].map(product => (
+              <div className="hot-product-card" key={product.id}>
+                <div className="product-image-container">
+                  <img src={product.image} alt={product.name} />
+                  {product.isNew && <span className="product-badge">New</span>}
+                </div>
+                <div className="product-info">
+                  <h2>{product.name}</h2>
+                  <div className="product-price">
+                    ${product.price}
+                    {product.originalPrice && (
+                      <span className="original-price">${product.originalPrice}</span>
+                    )}
+                  </div>
+                  <button className="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="show-more">
+          <button className="show-more-btn">Show More</button>
+        </div>
+</div>
+    )
 }
+ 
