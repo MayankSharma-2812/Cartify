@@ -1,6 +1,14 @@
 import "./Home.css"
+import { products } from "../data/products"
+import { useCart } from "../context/CartContext"
+import { useWishlist } from "../context/WishlistContext"
 
 export default function Home() {
+    const { addToCart } = useCart();
+    const { addToWishlist, isInWishlist } = useWishlist();
+
+    const hotProducts = products.slice(0, 4);
+
     return (
         <div className="home-container">
             <div className="hero-section">
@@ -8,9 +16,9 @@ export default function Home() {
                     <figure>
                         {[1, 2, 3, 4, 5, 6].map(slide => (
                             <div className="slide" key={slide}>
-                                <img 
-                                    src={`/images/shoes/${slide}.jpg`} 
-                                    alt={`Slide ${slide}`} 
+                                <img
+                                    src={`/images/shoes/${slide}.jpg`}
+                                    alt={`Slide ${slide}`}
                                 />
                                 <div className="slide-content">
                                     <h1>{`Slide ${slide}`}</h1>
@@ -26,7 +34,7 @@ export default function Home() {
                 <div className="features-grid">
                     {[1, 2, 3].map(feature => (
                         <div className="feature-card" key={feature}>
-                            <div className="feature-icon">{`&#x${feature+159}`}</div>
+                            <div className="feature-icon">{`&#x${feature + 159}`}</div>
                             <h3>{`Feature ${feature}`}</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
@@ -36,21 +44,34 @@ export default function Home() {
             <div className="hots">
                 <h1>Hot Products</h1>
                 <div className="hot-products">
-                    {[1, 2, 3, 4].map(product => (
-                        <div className="hot-product-card" key={product}>
+                    {hotProducts.map(product => (
+                        <div className="hot-product-card" key={product.id}>
                             <div className="product-image-container">
-                                <img src={`/images/shoes/${product}.jpg`} alt={`Product ${product}`} />
-                                {product === 1 && <span className="product-badge">New</span>}
+                                <img src={product.image} alt={product.name} />
+                                {product.isNew && <span className="product-badge">New</span>}
                             </div>
                             <div className="product-info">
-                                <h2>{`Product ${product}`}</h2>
+                                <h2>{product.name}</h2>
                                 <div className="product-price">
-                                    ${product * 10}
-                                    {product === 2 && (
-                                        <span className="original-price">${product * 15}</span>
+                                    ${product.price}
+                                    {product.originalPrice && (
+                                        <span className="original-price">${product.originalPrice}</span>
                                     )}
                                 </div>
-                                <button className="add-to-cart">Add to Cart</button>
+                                <div className="product-actions">
+                                    <button
+                                        className="add-to-cart"
+                                        onClick={() => addToCart(product)}
+                                    >
+                                        Add to Cart
+                                    </button>
+                                    <button
+                                        className={`wishlist-btn ${isInWishlist(product.id) ? 'in-wishlist' : ''}`}
+                                        onClick={() => addToWishlist(product)}
+                                    >
+                                        {isInWishlist(product.id) ? '❤️' : '🤍'}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -60,3 +81,5 @@ export default function Home() {
                 <button className="show-more-btn">Show More</button>
             </div>
         </div>
+    )
+}

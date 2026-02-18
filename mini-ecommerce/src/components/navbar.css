@@ -70,6 +70,7 @@
 
 .brand-name {
   background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 800;
@@ -124,6 +125,23 @@
 .nav-icon {
   margin-right: 0.5rem;
   font-size: 1.25rem;
+}
+
+/* Wishlist count badge */
+.wishlist-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
 /* Cart Link */
@@ -236,6 +254,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -247,6 +266,14 @@
   opacity: 0;
 }
 
-.nav-link:nth-child(1) { animation-delay: 0.1s; }
-.nav-link:nth-child(2) { animation-delay: 0.2s; }
-.nav-link:nth-child(3) { animation-delay: 0.3s; }
+.nav-link:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.nav-link:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.nav-link:nth-child(3) {
+  animation-delay: 0.3s;
+}

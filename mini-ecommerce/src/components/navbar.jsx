@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiShoppingCart, FiHeart, FiMenu, FiX } from 'react-icons/fi';
 import { FaTshirt } from 'react-icons/fa';
+import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 import logo from '../images/logo.png';
 import './navbar.css';
 
@@ -9,12 +11,14 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { getTotalItems } = useCart();
+  const { getWishlistCount } = useWishlist();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -39,8 +43,8 @@ export default function Navbar() {
           <span className="brand-name">Cartify</span>
         </Link>
 
-        <button 
-          className="hamburger" 
+        <button
+          className="hamburger"
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}
           aria-label="Toggle navigation"
@@ -57,11 +61,14 @@ export default function Navbar() {
             <Link to="/wishlist" className={`nav-link ${isActive('/wishlist')}`}>
               <FiHeart className="nav-icon" />
               <span>Wishlist</span>
+              {getWishlistCount() > 0 && (
+                <span className="wishlist-count">{getWishlistCount()}</span>
+              )}
             </Link>
             <Link to="/cart" className={`nav-link cart-link ${isActive('/cart')}`}>
               <div className="cart-icon-container">
                 <FiShoppingCart className="nav-icon" />
-                <span className="cart-count">0</span>
+                <span className="cart-count">{getTotalItems()}</span>
               </div>
               <span>Cart</span>
             </Link>
