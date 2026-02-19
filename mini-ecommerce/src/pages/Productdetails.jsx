@@ -39,7 +39,9 @@ export default function ProductDetails() {
                     <div className="product-detail-price">
                         <span className="current-price">${product.price}</span>
                         {product.originalPrice && (
-                            <span className="original-price">${product.originalPrice}</span>
+                            <span className="original-price">
+                                ${product.originalPrice}
+                            </span>
                         )}
                     </div>
 
